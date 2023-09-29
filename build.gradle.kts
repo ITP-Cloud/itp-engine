@@ -21,8 +21,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-	// https://mvnrepository.com/artifact/org.projectlombok/lombok
-	compileOnly("org.projectlombok:lombok:0.11.0")
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+	implementation("org.springframework.boot:spring-boot-starter-security:3.1.4")
+
 
 }
 

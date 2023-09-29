@@ -15,19 +15,22 @@ public class TerminalOperationSession {
         this.userInputs = userInputs;
     }
 
-    public String getInitialCommand() {
-        return initialCommand;
+    public TerminalOperationSession setInitialCommand(String initialCommand) {
+        this.initialCommand = initialCommand;
+        return this;
     }
 
-    public void setInitialCommand(String initialCommand) {
-        this.initialCommand = initialCommand;
+    public TerminalOperationSession addUserInput(String input) {
+        this.userInputs.add(input);
+        return this;
+    }
+
+    public String getInitialCommand() {
+        return initialCommand;
     }
 
     public List<String> getUserInputs() {
         return userInputs;
     }
 
-    public void setUserInputs(List<String> userInputs) {
-        this.userInputs = userInputs;
-    }
 }

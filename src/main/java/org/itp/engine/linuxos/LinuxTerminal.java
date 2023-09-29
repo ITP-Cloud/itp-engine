@@ -1,5 +1,4 @@
 package org.itp.engine.linuxos;
-
 import java.io.*;
 import java.util.List;
 
@@ -9,16 +8,18 @@ public class LinuxTerminal {
     private StringBuilder sessionOutput;
 
     public LinuxTerminal() {
+        this.sessionOutput = new StringBuilder();
     }
 
     public void setSession(TerminalOperationSession session) {
         this.session = session;
+        this.sessionOutput = new StringBuilder();
     }
 
-    public void executeSession(){
+    public String executeSession(){
         try {
 
-            String[] command = this.session.getInitialCommand().split(" "); 
+            String[] command = this.session.getInitialCommand().split(" ");
             ProcessBuilder builder = new ProcessBuilder(command);
             Process process = builder.start();
 
@@ -32,6 +33,7 @@ public class LinuxTerminal {
             BufferedReader error = new BufferedReader(new InputStreamReader(stderr));
 
             // Send inputs
+            System.out.println("On top of inputs");
             List<String> userInputs = this.session.getUserInputs();
             for (String input :
                     userInputs) {
@@ -49,10 +51,10 @@ public class LinuxTerminal {
 
         } catch (IOException e) {
             e.printStackTrace();
+            this.sessionOutput.append("\n\n\n Errors: \n").append(e.toString());
         }
-    }
 
-    public StringBuilder getSessionOutput() {
-        return sessionOutput;
+        return this.sessionOutput.toString();
     }
 }
+

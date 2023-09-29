@@ -1,5 +1,6 @@
 package org.itp.engine.linuxos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TerminalOperationSession {
@@ -8,11 +9,13 @@ public class TerminalOperationSession {
     private List<String> userInputs;
 
     public TerminalOperationSession() {
+        this.initialCommand = "";
+        this.userInputs = new ArrayList<String>();
     }
 
-    public TerminalOperationSession(String initialCommand, List<String> userInputs) {
+    public TerminalOperationSession(String initialCommand) {
         this.initialCommand = initialCommand;
-        this.userInputs = userInputs;
+        this.userInputs = new ArrayList<String>();
     }
 
     public TerminalOperationSession setInitialCommand(String initialCommand) {
@@ -34,3 +37,4 @@ public class TerminalOperationSession {
     }
 
 }
+

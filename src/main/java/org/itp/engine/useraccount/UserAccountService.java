@@ -24,7 +24,19 @@ public class UserAccountService {
         LinuxTerminal terminal = new LinuxTerminal();
         terminal.setSession(session);
         String output = terminal.executeSession();
-
+        System.out.println(output);
         return output.contains("Adding user");
+    }
+
+    public boolean deleteUser(UserAccount user) {
+        TerminalOperationSession session = TerminalOperationSessionFactory
+                .getSessionWith("userdel -r " + user.getLinuxUsername());
+        session.addUserInput("");
+
+        LinuxTerminal terminal = new LinuxTerminal();
+        terminal.setSession(session);
+        String output = terminal.executeSession();
+
+        return true;
     }
 }

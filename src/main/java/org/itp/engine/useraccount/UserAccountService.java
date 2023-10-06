@@ -24,7 +24,7 @@ public class UserAccountService {
         LinuxTerminal terminal = new LinuxTerminal();
         terminal.setSession(session);
         String output = terminal.executeSession();
-        System.out.println(output);
+
         return output.contains("Adding user");
     }
 
@@ -35,7 +35,7 @@ public class UserAccountService {
 
         LinuxTerminal terminal = new LinuxTerminal();
         terminal.setSession(session);
-        String output = terminal.executeSession();
+        terminal.executeSession();
 
         return true;
     }

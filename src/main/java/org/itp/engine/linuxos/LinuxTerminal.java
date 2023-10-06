@@ -33,11 +33,10 @@ public class LinuxTerminal {
             BufferedReader error = new BufferedReader(new InputStreamReader(stderr));
 
             // Send inputs
-            System.out.println("On top of inputs");
             List<String> userInputs = this.session.getUserInputs();
             for (String input :
                     userInputs) {
-                writer.write(input + " \n");
+                writer.write(input + "\n");
                 writer.flush();
             }
 

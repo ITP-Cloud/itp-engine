@@ -14,13 +14,13 @@ public class FtpServerService {
                 .getSessionWith("systemctl restart vsftpd");
 
         session
-                .addUserInput("mkdir /home/"+user.getLinuxUsername()+"/ftp")
-                .addUserInput("chown nobody:nogroup /home/"+user.getLinuxUsername()+"/ftp")
-                .addUserInput("chmod a-w /home/"+user.getLinuxUsername()+"/ftp")
-                .addUserInput("mkdir /home/"+user.getLinuxUsername()+"/ftp/websites")
-                .addUserInput("chown "+user.getLinuxUsername()+":"+user.getLinuxUsername()+" /home/"+user.getLinuxUsername()+"/ftp/files")
-                .addUserInput("echo \""+user.getLinuxUsername()+"\" | sudo tee -a /etc/vsftpd.userlist")
-                .addUserInput("usermod "+user.getLinuxUsername()+" -s /bin/ftponly")
+                .addUserInput("mkdir /home/"+user.getFtpUsername()+"/ftp")
+                .addUserInput("chown nobody:nogroup /home/"+user.getFtpUsername()+"/ftp")
+                .addUserInput("chmod a-w /home/"+user.getFtpUsername()+"/ftp")
+                .addUserInput("mkdir /home/"+user.getFtpUsername()+"/ftp/websites")
+                .addUserInput("chown "+user.getFtpUsername()+":"+user.getFtpUsername()+" /home/"+user.getFtpUsername()+"/ftp/files")
+                .addUserInput("echo \""+user.getFtpUsername()+"\" | sudo tee -a /etc/vsftpd.userlist")
+                .addUserInput("usermod "+user.getFtpUsername()+" -s /bin/ftponly")
                 .addUserInput("systemctl restart vsftpd");
 
         LinuxTerminal terminal = new LinuxTerminal();

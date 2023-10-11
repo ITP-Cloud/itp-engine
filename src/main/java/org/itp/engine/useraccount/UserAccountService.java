@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserAccountService {
 
     public boolean createUser(UserAccount user){
+
         TerminalOperationSession session = TerminalOperationSessionFactory
                 .getSessionWith("adduser "+ user.getLinuxUsername());
         session
@@ -30,7 +31,7 @@ public class UserAccountService {
 
     public boolean deleteUser(UserAccount user) {
         TerminalOperationSession session = TerminalOperationSessionFactory
-                .getSessionWith("userdel -r " + user.getLinuxUsername());
+                .getSessionWith("userdel -r -f " + user.getLinuxUsername());
         session.addUserInput("");
 
         LinuxTerminal terminal = new LinuxTerminal();

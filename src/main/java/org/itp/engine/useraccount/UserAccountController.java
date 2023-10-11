@@ -7,8 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/")
 @CrossOrigin
+@RequestMapping("api/v1/")
 public class UserAccountController {
 
     private final UserAccountService service;
@@ -18,7 +18,7 @@ public class UserAccountController {
         this.service = service;
     }
 
-    @PostMapping("user-account")
+    @PostMapping("user-account/new")
     public ResponseEntity<ApiResponse> createUser(@RequestBody UserAccount request){
 
         this.service.createUser(request);
@@ -31,7 +31,7 @@ public class UserAccountController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @PostMapping("user-account")
+    @PostMapping("user-account/delete")
     public ResponseEntity<ApiResponse> deleteUser(@RequestBody UserAccount request) {
 
         this.service.deleteUser(request);

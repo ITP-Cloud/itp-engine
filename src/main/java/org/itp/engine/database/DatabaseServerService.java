@@ -4,7 +4,9 @@ import org.itp.engine.linuxos.LinuxTerminal;
 import org.itp.engine.linuxos.TerminalOperationSession;
 import org.itp.engine.linuxos.TerminalOperationSessionFactory;
 import org.itp.engine.useraccount.UserAccount;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DatabaseServerService {
 
     public boolean createDbAccount(UserAccount user) {
@@ -12,8 +14,8 @@ public class DatabaseServerService {
                 .getSessionWith("mysql");
 
         session
-                .addUserInput(" CREATE USER '"+user.getDbUsername()+"'@'localhost' IDENTIFIED WITH caching_sha2_password BY '"+user.getDbPassword()+"'; ")
-                .addUserInput(" GRANT ALL PRIVILEGES ON `"+user.getDbUsername()+"\\_%`.* TO '"+user.getDbUsername()+"'@'localhost'; ")
+                .addUserInput("CREATE USER '" + user.getDbUsername() + "'@'localhost' IDENTIFIED WITH caching_sha2_password BY '" + user.getDbPassword() + "'; ")
+                .addUserInput("GRANT ALL PRIVILEGES ON `" + user.getDbUsername() + "\\_%`.* TO '" + user.getDbUsername() + "'@'localhost'; ")
                 .addUserInput("exit")
                 .addUserInput("");
 
@@ -29,9 +31,8 @@ public class DatabaseServerService {
                 .getSessionWith("mysql");
 
         session
-                .addUserInput("ALTER USER '"+user.getDbUsername()+"'@'localhost' IDENTIFIED WITH caching_sha2_password BY '"+user.getDbUsername()+"'; ")
-                .addUserInput("exit")
-                .addUserInput("");
+                .addUserInput("ALTER USER '" + user.getDbUsername() + "'@'localhost' IDENTIFIED WITH caching_sha2_password BY '" + user.getDbUsername() + "';")
+                .addUserInput("exit;");
 
         LinuxTerminal terminal = new LinuxTerminal();
         terminal.setSession(session);
@@ -45,14 +46,14 @@ public class DatabaseServerService {
                 .getSessionWith("mysql");
 
         session
-                .addUserInput("REVOKE ALL PRIVILEGES FROM '"+user.getDbUsername()+"'@'localhost' ")
-                .addUserInput("DROP USER '"+user.getDbUsername()+"'@'localhost' ")
-                .addUserInput("exit")
-                .addUserInput("");
+//  TODO: Find a query that works:
+//  .addUserInput("REVOKE ALL PRIVILEGES FROM ON `"+user.getDbUsername()+ "\\_%`.* FROM '"+user.getDbUsername()+"'@'localhost';")
+                .addUserInput("DROP USER '" + user.getDbUsername() + "'@'localhost';")
+                .addUserInput("exit;");
 
         LinuxTerminal terminal = new LinuxTerminal();
         terminal.setSession(session);
-        terminal.executeSession();
+        System.out.println(terminal.executeSession());
 
         return true;
     }
@@ -78,9 +79,8 @@ public class DatabaseServerService {
                 .getSessionWith("mysql");
 
         session
-                .addUserInput("DROP DATABASE "+database.getDatabaseName()+";")
-                .addUserInput("exit;")
-                .addUserInput("");
+                .addUserInput("DROP DATABASE " + database.getDatabaseName() + ";")
+                .addUserInput("exit;");
 
         LinuxTerminal terminal = new LinuxTerminal();
         terminal.setSession(session);

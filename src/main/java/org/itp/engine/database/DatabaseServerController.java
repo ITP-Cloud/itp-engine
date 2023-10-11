@@ -53,7 +53,7 @@ public class DatabaseServerController {
         this.service.deleteDbAccount(user);
 
         ApiResponse response = new ApiResponse(
-                "Database user account successfully created",
+                "Database user account successfully deleted",
                 HttpStatus.OK.value()
         );
 

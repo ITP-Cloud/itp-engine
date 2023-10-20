@@ -48,9 +48,14 @@ public class LinuxTerminal {
             // Display any errors
             while ((line = error.readLine()) != null) this.sessionOutput.append(line);
 
+            // Cleanup
+            reader.close();
+            writer.close();
+            error.close();
+            process.destroy();
         } catch (IOException e) {
             e.printStackTrace();
-            this.sessionOutput.append("\n\n\n Errors: \n").append(e.toString());
+            this.sessionOutput.append("\n\n\n Errors: \n").append(e);
         }
 
         return this.sessionOutput.toString();

@@ -30,9 +30,14 @@ public class UserAccountService {
     }
 
     public boolean deleteUser(UserAccount user) {
+
         TerminalOperationSession session = TerminalOperationSessionFactory
-                .getSessionWith("userdel -r -f " + user.getLinuxUsername());
-        session.addUserInput("");
+                .getSessionWith("bash");
+        session
+                .addUserInput("groupdel " + user.getFtpUsername() + "_n_www-data")
+                .addUserInput("userdel -r -f " + user.getLinuxUsername())
+                .addUserInput("systemctl restart vsftpd")
+                .addUserInput("systemctl reload apache2");
 
         LinuxTerminal terminal = new LinuxTerminal();
         terminal.setSession(session);

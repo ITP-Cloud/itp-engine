@@ -1,6 +1,5 @@
 package org.itp.engine.ftp;
 
-import org.itp.engine.database.Database;
 import org.itp.engine.restful.ApiResponse;
 import org.itp.engine.useraccount.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class FtpServerController {
         this.service.createFtpAccount(user);
 
         ApiResponse response = new ApiResponse(
-                "Database successfully created",
+                "FTP account successfully created",
                 HttpStatus.OK.value()
         );
 

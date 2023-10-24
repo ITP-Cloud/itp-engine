@@ -1,8 +1,8 @@
 package org.itp.engine.useraccount;
 
-import org.itp.engine.linuxos.LinuxTerminal;
-import org.itp.engine.linuxos.TerminalOperationSession;
-import org.itp.engine.linuxos.TerminalOperationSessionFactory;
+import org.itp.engine.osutils.OSTerminal;
+import org.itp.engine.osutils.TerminalOperationSession;
+import org.itp.engine.osutils.TerminalOperationSessionFactory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +22,7 @@ public class UserAccountService {
                 .addUserInput("")
                 .addUserInput("Y");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         String output = terminal.executeSession();
 
@@ -39,7 +39,7 @@ public class UserAccountService {
                 .addUserInput("systemctl restart vsftpd")
                 .addUserInput("systemctl reload apache2");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         terminal.executeSession();
 

@@ -63,7 +63,7 @@ public class DatabaseServerController {
     @PostMapping("database/new")
     public ResponseEntity<ApiResponse> createDatabase(@RequestBody Database database){
 
-        this.service.createDB(database);
+        this.service.createDb(database);
 
         ApiResponse response = new ApiResponse(
                 "Database successfully created",
@@ -76,7 +76,7 @@ public class DatabaseServerController {
     @PostMapping("database/delete")
     public ResponseEntity<ApiResponse> deleteDatabase(@RequestBody Database database){
 
-        this.service.dropDB(database);
+        this.service.dropDb(database);
 
         ApiResponse response = new ApiResponse(
                 "Database successfully dropped",

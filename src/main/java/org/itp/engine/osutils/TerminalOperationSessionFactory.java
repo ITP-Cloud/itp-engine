@@ -1,4 +1,4 @@
-package org.itp.engine.linuxos;
+package org.itp.engine.osutils;
 
 public class TerminalOperationSessionFactory {
     public static TerminalOperationSession getSessionWith(String initialCommand){

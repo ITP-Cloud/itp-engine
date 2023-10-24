@@ -1,8 +1,8 @@
 package org.itp.engine.database;
 
-import org.itp.engine.linuxos.LinuxTerminal;
-import org.itp.engine.linuxos.TerminalOperationSession;
-import org.itp.engine.linuxos.TerminalOperationSessionFactory;
+import org.itp.engine.osutils.OSTerminal;
+import org.itp.engine.osutils.TerminalOperationSession;
+import org.itp.engine.osutils.TerminalOperationSessionFactory;
 import org.itp.engine.useraccount.UserAccount;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ public class DatabaseServerService {
                 .addUserInput("exit")
                 .addUserInput("");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         terminal.executeSession();
 
@@ -34,7 +34,7 @@ public class DatabaseServerService {
                 .addUserInput("ALTER USER '" + user.getDbUsername() + "'@'localhost' IDENTIFIED WITH caching_sha2_password BY '" + user.getDbUsername() + "';")
                 .addUserInput("exit;");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         terminal.executeSession();
 
@@ -51,30 +51,30 @@ public class DatabaseServerService {
                 .addUserInput("DROP USER '" + user.getDbUsername() + "'@'localhost';")
                 .addUserInput("exit;");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         System.out.println(terminal.executeSession());
 
         return true;
     }
 
-    public boolean createDB(Database database) {
+    public boolean createDb(Database database) {
         TerminalOperationSession session = TerminalOperationSessionFactory
                 .getSessionWith("mysql");
 
         session
-                .addUserInput("CREATE DATABASE "+database.getDatabaseName()+";")
+                .addUserInput("CREATE DATABASE " + database.getDatabaseName() + ";")
                 .addUserInput("exit;")
                 .addUserInput("");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         terminal.executeSession();
 
         return true;
     }
 
-    public boolean dropDB(Database database) {
+    public boolean dropDb(Database database) {
         TerminalOperationSession session = TerminalOperationSessionFactory
                 .getSessionWith("mysql");
 
@@ -82,7 +82,7 @@ public class DatabaseServerService {
                 .addUserInput("DROP DATABASE " + database.getDatabaseName() + ";")
                 .addUserInput("exit;");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         terminal.executeSession();
 

@@ -1,8 +1,8 @@
 package org.itp.engine.website;
 
-import org.itp.engine.linuxos.LinuxTerminal;
-import org.itp.engine.linuxos.TerminalOperationSession;
-import org.itp.engine.linuxos.TerminalOperationSessionFactory;
+import org.itp.engine.osutils.OSTerminal;
+import org.itp.engine.osutils.TerminalOperationSession;
+import org.itp.engine.osutils.TerminalOperationSessionFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.FileWriter;
@@ -50,9 +50,31 @@ public class WebsiteService {
                 // Step 8: Reload apache
                 .addUserInput("systemctl reload apache2");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         terminal.executeSession();
 
     }
+
+    // TODO: Implement delete website
+//    public void deleteWebsite(Website website){
+//        TerminalOperationSession session = TerminalOperationSessionFactory
+//                .getSessionWith("bash");
+//        session
+//                // Step 2: Create Website Folder
+//                .addUserInput("rm -r " + website.getWebsiteAbsolutePath())
+//
+//                // Step 5: Allow traffic through designated port
+//                .addUserInput("ufw allow " + website.getPortNumber())
+//                // Step 6: Add port to apache ports as well
+//                .addUserInput("echo \"Listen " + website.getPortNumber() + "\" | sudo tee -a /etc/apache2/ports.conf")
+//                // Step 7: Activate vhost
+//                .addUserInput("a2dissite " + website.getVhostIdentifier() + ".conf")
+//                // Step 8: Reload apache
+//                .addUserInput("systemctl reload apache2");
+//
+//        OSTerminal terminal = new OSTerminal();
+//        terminal.setSession(session);
+//        terminal.executeSession();
+//    }
 }

@@ -1,13 +1,13 @@
-package org.itp.engine.linuxos;
+package org.itp.engine.osutils;
 import java.io.*;
 import java.util.List;
 
-public class LinuxTerminal {
+public class OSTerminal {
 
     private TerminalOperationSession session;
     private StringBuilder sessionOutput;
 
-    public LinuxTerminal() {
+    public OSTerminal() {
         this.sessionOutput = new StringBuilder();
     }
 

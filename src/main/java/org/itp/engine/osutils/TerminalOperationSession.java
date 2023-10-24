@@ -1,4 +1,4 @@
-package org.itp.engine.linuxos;
+package org.itp.engine.osutils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 public class TerminalOperationSession {
 
     private String initialCommand;
-    private List<String> userInputs;
+    private final List<String> userInputs;
 
     public TerminalOperationSession() {
         this.initialCommand = "";

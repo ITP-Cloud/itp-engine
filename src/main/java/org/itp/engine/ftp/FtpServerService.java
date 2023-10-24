@@ -1,8 +1,8 @@
 package org.itp.engine.ftp;
 
-import org.itp.engine.linuxos.LinuxTerminal;
-import org.itp.engine.linuxos.TerminalOperationSession;
-import org.itp.engine.linuxos.TerminalOperationSessionFactory;
+import org.itp.engine.osutils.OSTerminal;
+import org.itp.engine.osutils.TerminalOperationSession;
+import org.itp.engine.osutils.TerminalOperationSessionFactory;
 import org.itp.engine.useraccount.UserAccount;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +48,7 @@ public class FtpServerService {
                 // Step 10: Cleanup
                 .addUserInput("systemctl restart vsftpd");
 
-        LinuxTerminal terminal = new LinuxTerminal();
+        OSTerminal terminal = new OSTerminal();
         terminal.setSession(session);
         System.out.println(terminal.executeSession());
 

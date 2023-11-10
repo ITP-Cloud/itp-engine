@@ -16,7 +16,7 @@ public class DatabaseServerService {
         session
                 .addUserInput("CREATE USER '" + user.getDbUsername() + "'@'localhost' IDENTIFIED WITH caching_sha2_password BY '" + user.getDbPassword() + "'; ")
                 .addUserInput("GRANT ALL PRIVILEGES ON `" + user.getDbUsername() + "\\_%`.* TO '" + user.getDbUsername() + "'@'localhost'; ")
-                .addUserInput("exit")
+                .addUserInput("exit; ")
                 .addUserInput("");
 
         OSTerminal terminal = new OSTerminal();
@@ -64,7 +64,7 @@ public class DatabaseServerService {
 
         session
                 .addUserInput("CREATE DATABASE " + database.getDatabaseName() + ";")
-                .addUserInput("exit;")
+                .addUserInput("exit; ")
                 .addUserInput("");
 
         OSTerminal terminal = new OSTerminal();

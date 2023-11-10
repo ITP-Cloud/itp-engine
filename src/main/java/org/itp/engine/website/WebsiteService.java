@@ -16,7 +16,8 @@ public class WebsiteService {
             // Step 1: Create and Add content to new vhost file
             VHost newVhost = new VHost(
                     website.getPortNumber(),
-                    website.getWebsiteAbsolutePath()
+                    website.getWebsiteAbsolutePath(),
+                    website.hasPublicFolder()
             );
 
             FileWriter writer =
@@ -34,14 +35,24 @@ public class WebsiteService {
                 .getSessionWith("bash");
         session
                 // Step 2: Create Website Folder
-                .addUserInput("mkdir " + website.getWebsiteAbsolutePath())
-                // Step 3: Permission and ownership
+                .addUserInput("mkdir " + website.getWebsiteAbsolutePath());
+        if (website.hasPublicFolder()) {
+            session.addUserInput("mkdir " + website.getWebsiteAbsolutePath() + "/public");
+        }
+        // Step 3: Permission and ownership
+        session
                 .addUserInput("chown www-data:" + website.getLinuxUser() + "_n_www-data -R " + website.getWebsiteAbsolutePath())
-                .addUserInput("chmod 770 -R " + website.getWebsiteAbsolutePath())
+                .addUserInput("chmod 770 -R " + website.getWebsiteAbsolutePath());
 
-                // Step 4: Add default index page
-                .addUserInput("cp /home/aaron/index.html " + website.getWebsiteAbsolutePath() + "/index.html")
-                // Step 5: Allow traffic through designated port
+        // Step 4: Add default index page
+        if (website.hasPublicFolder()) {
+            session.addUserInput("cp /home/itp_sys_manager/index.html " + website.getWebsiteAbsolutePath() + "/public/index.html");
+        } else {
+            session.addUserInput("cp /home/itp_sys_manager/index.html " + website.getWebsiteAbsolutePath() + "/index.html");
+        }
+
+        // Step 5: Allow traffic through designated port
+        session
                 .addUserInput("ufw allow " + website.getPortNumber())
                 // Step 6: Add port to apache ports as well
                 .addUserInput("echo \"Listen " + website.getPortNumber() + "\" | sudo tee -a /etc/apache2/ports.conf")
